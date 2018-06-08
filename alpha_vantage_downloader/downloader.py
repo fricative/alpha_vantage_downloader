@@ -9,7 +9,7 @@ from alpha_vantage_downloader.config import api_map
 
 class downloader():
     
-    wait_time = .5  # time between each api call, be gentle to alpha vantage server :)
+  
     
     def get_url(self, periodicity):
         config = '&apikey=' + self.key + '&datatype=' + self.datatype \
@@ -17,10 +17,13 @@ class downloader():
         return api_map[periodicity] + config
     
     
-    def __init__(self, key: str, datatype: str='csv', output_size:str ='full'):
+    def __init__(self, key: str, datatype: str='csv', 
+                 output_size:str ='full', wait_time:float = 2.0):
         self.key = key
         self.datatype = datatype
         self.output_size = output_size
+        # time between each api call, be gentle to alpha vantage server :)
+        self.wait_time = wait_time    
         self.data = {key: {} for key in api_map.keys()}
         
         
