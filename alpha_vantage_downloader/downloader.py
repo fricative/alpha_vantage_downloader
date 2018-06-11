@@ -1,11 +1,25 @@
 # -*- coding: utf-8 -*-
 
+import logging
+import sys
 import threading
 import time
+import traceback
 
 import pandas as pd
 
 from alpha_vantage_downloader.config import api_map
+
+
+def get_logger():
+    logger = logging.getLogger('AlphaVantage Downloader')
+    logger.setLevel(logging.INFO)
+    ch = logging.StreamHandler(sys.stdout)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    return logger
+
 
 class downloader():
     
@@ -25,6 +39,7 @@ class downloader():
         # time between each api call, be gentle to alpha vantage server :)
         self.wait_time = wait_time    
         self.data = {key: {} for key in api_map.keys()}
+        self.logger = get_logger()
         
         
     def intraday(self, symbols, granularity: str) -> dict:
@@ -78,9 +93,12 @@ class downloader():
         
         def download(symbol, url, caller) -> None:
             try:
+                self.logger.info('Downloading %s', symbol)
                 df = pd.read_csv(url)
                 self.data[caller].update({symbol: df})
             except Exception as ex:
+                self.logger.exception('Error occurred when downloading %s', symbol)
+                self.logger.exception(traceback.format_exc())
                 self.data[caller].update({symbol: str(ex)})
                 
         threads = []
