@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'alpha_vantage_downloader',
-    version = '0.0.1',
+    version = '0.0.3',
     url = 'https://github.com/fricative/alpha_vantage_downloader',
     author = 'fricative',
     author_email = 'keye906@yahoo.com',
