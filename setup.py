@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'alpha_vantage_downloader',
-    version = '0.0.3',
+    version = '0.0.5',
     url = 'https://github.com/fricative/alpha_vantage_downloader',
     author = 'fricative',
     author_email = 'keye906@yahoo.com',
@@ -12,7 +12,7 @@ setup(
     packages = find_packages(),
     install_requires = ['pandas'],
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

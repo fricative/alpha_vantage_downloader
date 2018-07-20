@@ -17,9 +17,8 @@ $ pip install alpha_vantage_downloader
 ```
 from alpha_vantage_downloader.downloader import downloader
 
-# supply your api key to intialize an instance, 
-# wait_time is the number of seconds in between each API call
-worker = downloader(key='your-api-key-here', wait_time=0.5)   
+# supply your api key to intialize an instance
+worker = downloader(key='your-api-key-here')   
 tickers = ['AAPL', 'MSFT']
 
 daily_price = worker.daily(tickers)
@@ -33,9 +32,9 @@ daily_price['AAPL']    # print out the daily price dataframe from calling daily 
 
 ```
 worker.daily(tickers)           # daily price
-worker.adjusted_daily(tickers)  # adjusted daily price
+worker.daily_adjusted(tickers)  # adjusted daily price
 worker.weekly(tickers)          # weekly price
-worker.adjusted_weekly(tickers) # adjusted weekly price
+worker.weekly_adjusted(tickers) # adjusted weekly price
 
 worker.intraday(symbols=tickers, granularity='1min')   # supports the granularity listed on alpha vantage doc page
 
